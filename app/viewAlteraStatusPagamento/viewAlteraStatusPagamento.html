@@ -1,0 +1,21 @@
+<div class="container" >
+
+	<div ng-controller="ViewAlteraStatusPagamentoCtrl">
+		<center><h1>Selecione o Status do Pagamento</h1></center>
+		<div class="form-group">
+			<form>
+			<label> Status do pagamento </label>
+		  	<div class="radio">
+		      	<label><input type="radio" ng-model="payment.status" name="optradio" value="paid">Pago</label>
+		    </div>
+		  	<div class="radio">
+		      	<label><input type="radio" ng-model="payment.status" name="optradio" value="pending">Processando</label>
+		    </div>
+		    <div class="radio">
+		    	<label><input type="radio" ng-model="payment.status" name="optradio" value="failed">Falhou</label>
+		    </div>
+  			</form>			
+   		</div>
+   		<a href="#!/VisualizarPagamentos" class="btn btn-success" ng-click="sendPatch()">Alterar Status</a>
+   	</div>
+</div>

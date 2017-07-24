@@ -1,0 +1,14 @@
+<div class="container" >
+
+	<div ng-controller="ViewCriaPagamentoCtrl">
+		<center><h1>Cadastro de Novo Pagamento</h1></center>
+		<center><p>Preencha as informações corretamente</p></center>
+		<div class="form-group">
+			<label> Valor do Pagamento em Centavos </label>
+			<input type="text" class="form-control" ng-model="valor" data-toogle="tooltip" title="O valor digitado deve ser em centavos" placeholder="Valor do pagamento em centavos"/>
+		</div>
+		<hr>
+		<h4> Obs. O pagamento será cadastrado com o status "Pending"</h4>
+    	<a href="#!/VisualizarPagamentos" class="btn btn-success" ng-click="sendPost()">Enviar Pagamento</a>
+    </div>
+</div>

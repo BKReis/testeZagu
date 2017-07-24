@@ -1,0 +1,59 @@
+<div class="container">
+	<div ng-controller="ViewPagamentosCtrl">
+	    <center><h2>Visualização dos dados do cartão que se deseja ver os pagamentos</h2></center>
+	    <hr>
+		<table class="table table-striped">
+		    <thead>
+		      <tr>
+		      	<th>ID do Cartão</th>
+		     	<th>Nome do Portador</th>
+		        <th>Número do Cartão</th>
+		        <th>Bandeira do Cartão</th>
+		        <th>Data de expiração</th>
+		        <th>Limite Total</th>
+		        <th>Limite Disponível</t<a href="#!/CriarPagamento	" class="btn btn-success">Criar Pagamento</a>h>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<tr>
+			      	<td><a href="#!/VisualizarPagamentos" ng-click="">{{cards.id}}</a></td>
+			        <td>{{cards.name}}</td>
+			        <td>{{cards.number}}</td>
+			        <td>{{cards.brand}}</td>
+					<td>{{cards.exp_month}}/{{cards.exp_year}}</td>
+					<td>{{cards.limit}}</td>
+					<td>{{cards.available_limit}}</td>
+			    </tr>
+		    </tbody>
+		  </table>
+		  <br>
+		  <hr>
+		  <br>
+		  <center><h2>Visualização dos pagamentos do cartão</h2></center>
+		  <table class="table table-striped">
+		    <thead>
+		     	<tr>
+			      	<th>Valor do Pagamento</th>
+			     	<th>Cartão de Crédito</th>
+			        <th>Data e hora do pagamento</th>
+			        <th>Status</th>
+			        <th></th>
+			        <th></th>
+			    </tr>
+		    </thead>
+		    <tbody>
+		      	<tr ng-repeat="pagamento in pagamentos">
+			        <td>{{pagamento.amount}}</td>
+			        <td>{{pagamento.card_id}}</td>
+			        <td>{{pagamento.date}}</td>
+					<td>{{pagamento.status}}</td>
+					<td><a class="btn btn-danger" ng-click="setIdPagamentoDeletado(pagamento.id)">Deletar Pagamento</a></td>
+					<td><a href="#!/AlterarStatusPagamento" class="btn btn-warning" ng-click="setIdPagamentoAlterado(pagamento.id,pagamento.status)">Alterar Status</a></td>
+				</tr>
+		    </tbody>
+		  </table>
+		  <a href="#!/CriarPagamento" class="btn btn-success">Criar Pagamento</a>
+
+
+	</div>	
+</div>

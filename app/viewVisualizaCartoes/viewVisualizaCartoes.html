@@ -1,0 +1,39 @@
+<div class="container">
+	<div ng-controller="ViewVisualizaCartoesCtrl">
+	    <center><h2>Visualização de todos os cartões de crédito que constam em nossa API</h2></center>
+	    <center><h4>Para ver os pagamentos de um determinado cartão, aperte sobre seu ID </h4></center>
+	    <hr>
+		<table class="table table-striped">
+		    <thead>
+		      <tr>
+		      	<th>ID do Cartão</th>
+		     	<th>Nome do Portador</th>
+		        <th>Número do Cartão</th>
+		        <th>Bandeira do Cartão</th>
+		        <th>Data de expiração</th>
+		        <th>Limite Total</th>
+		        <th>Limite Disponível</th>
+		        <th></th>
+		        <th></th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="card in cards">
+		      	<td><a href="#!/VisualizarPagamentos" ng-click="setIdCartaoPagamento(card.id)">{{card.id}}</a></td>
+		        <td>{{card.name}}</td>
+		        <td>{{card.number}}</td>
+		        <td>{{card.brand}}</td>
+				<td>{{card.exp_month}}/{{card.exp_year}}</td>
+				<td>{{card.limit}}</td>
+				<td>{{card.available_limit}}</td>
+				<td><a class="btn btn-danger" ng-click="setIdCartaoDeletado(card.id)">Deletar Cartão</a></td>
+				<td><td><a href="#!/AlteraCartao" class="btn btn-warning" ng-click="setIdCartaoAlterado(card.id)">Alterar Dados</a></td></td>
+		      </tr>
+		    </tbody>
+		  </table>
+
+		<br>
+	    <hr>
+	    
+	</div>	
+</div>
