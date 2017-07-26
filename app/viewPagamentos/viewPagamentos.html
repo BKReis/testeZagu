@@ -34,7 +34,7 @@
 		    <thead>
 		     	<tr>
 			      	<th>Valor do Pagamento</th>
-			     	<th>Cartão de Crédito</th>
+			     		<th>Cartão de Crédito</th>
 			        <th>Data e hora do pagamento</th>
 			        <th>Status</th>
 			        <th></th>
@@ -48,11 +48,11 @@
 			        <td>{{pagamento.date}}</td>
 					<td>{{pagamento.status}}</td>
 					<td><a class="btn btn-danger" ng-click="setIdPagamentoDeletado(pagamento.id)">Deletar Pagamento</a></td>
-					<td><a href="#!/AlterarStatusPagamento" class="btn btn-warning" ng-click="setIdPagamentoAlterado(pagamento.id,pagamento.status)">Alterar Status</a></td>
+					<td><a ng-href="#!/VisualizarPagamentos/{{pagamento.card_id}}/AlterarStatusPagamento/{{pagamento.id}}" class="btn btn-warning">Alterar Status</a></td>
 				</tr>
 		    </tbody>
 		  </table>
-		  <a href="#!/CriarPagamento" class="btn btn-success">Criar Pagamento</a>
+		  <a ng-href="#!/VisualizarPagamentos/{{cards.id}}/CriarPagamento" class="btn btn-success">Criar Pagamento</a>
 
 
 	</div>	

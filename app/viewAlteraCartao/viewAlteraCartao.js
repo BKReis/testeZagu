@@ -2,7 +2,7 @@
 
 angular.module('myApp.viewAlteraCartao', ['ngRoute'])
 
-    .controller('ViewAlteraCartaoCtrl', ["$http", "$scope",  "idChangeCardService","config", function ($http,$scope, idChangeCardService,config) {
+    .controller('ViewAlteraCartaoCtrl', ["$http", "$scope","$routeParams","$location", "config", function ($http,$scope,$routeParams,$location, config) {
         $scope.infos = {}
 
         $scope.numeroCartao = '';
@@ -10,14 +10,11 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
         $scope.nomePortador = '';
         $scope.limiteTotal = '';
         $scope.limiteDisponivel = ''; 
-
-
-        $scope.idChangeCard = idChangeCardService.idChangeCard;
         
         $scope.sendGet = function () {
             $http({
                 method: "GET",
-                url: config.URL + "cards/" + $scope.idChangeCard,
+                url: config.URL + "cards/" + $routeParams.idCard,
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
@@ -46,7 +43,7 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
         $scope.sendPatch = function () {
             $http({
                 method: "PATCH",
-                url: config.URL + "cards/" + $scope.idChangeCard,
+                url: config.URL + "cards/" + $routeParams.idCard,
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
@@ -62,7 +59,8 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
                 }
             }).then(function (response) {
                 $scope.info = response.data;
-                $scope.infoView = JSON.stringify($scope.info, null, "\t");
+                $location.path('/VisualizarCartoes');
+                
             }, function (response) {
                 $scope.info = response.data || 'Request failed';
 

@@ -10,6 +10,7 @@ angular.module('myApp', [
     'myApp.viewPagamentos',
     'myApp.viewCriaPagamento',
     'myApp.viewAlteraStatusPagamento',
+    'myApp.cardsServicesRequests',
     'ui.bootstrap'
 ])
 
@@ -39,22 +40,22 @@ angular.module('myApp', [
                 controller: 'ViewCadastraCartaoCtrl',
                 controllerAs: 'vm'
             })
-            .when('/AlteraCartao', {
+            .when('/AlteraCartao/:idCard', {
                 templateUrl: 'viewAlteraCartao/viewAlteraCartao.html',
                 controller: 'ViewAlteraCartaoCtrl',
                 controllerAs: 'vm'
             })
-            .when('/CriarPagamento',{
+            .when('/VisualizarPagamentos/:idCard/CriarPagamento',{
                 templateUrl: 'viewCriaPagamento/viewCriaPagamento.html',
                 controller: 'ViewCriaPagamentoCtrl',
                 controllerAs: 'vm'
             })
-            .when('/AlterarStatusPagamento',{
+            .when('/VisualizarPagamentos/:idCard/AlterarStatusPagamento/:idPayment',{
                 templateUrl: 'viewAlteraStatusPagamento/viewAlteraStatusPagamento.html',
                 controller: 'ViewAlteraStatusPagamentoCtrl',
                 controllerAs: 'vm'
             })
-            .when('/VisualizarPagamentos', {
+            .when('/VisualizarPagamentos/:idCard', {
                 templateUrl: 'viewPagamentos/viewPagamentos.html',
                 controller: 'ViewPagamentosCtrl',
                 controllerAs: 'vm'

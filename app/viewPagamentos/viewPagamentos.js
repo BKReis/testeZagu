@@ -4,11 +4,12 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
 
 
 
-    .controller('ViewPagamentosCtrl', ["$http","$scope","idCartaoPagamentosService","idPagamentoAlteraService","config", function ($http,$scope,idCartaoPagamentosService,idPagamentoAlteraService,config) {
+    .controller('ViewPagamentosCtrl', ["$http","$scope", "$routeParams", "idCartaoPagamentosService","idPagamentoAlteraService","config", function ($http,$scope,$routeParams,idCartaoPagamentosService,idPagamentoAlteraService,config) {
         $scope.pagamentos = {}
 
         $scope.idCartaoPagamento = idCartaoPagamentosService.idCartaoPagamento;
 
+             
         $scope.sendGet = function () {
             $http({
                 method: "GET",
@@ -16,7 +17,7 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
                 },
-                url: config.URL + "cards/" + $scope.idCartaoPagamento,
+                url: config.URL + "cards/" + $routeParams.idCard,
             }).then(function (response) {
                 $scope.cards = response.data;
                 $scope.cardsView = JSON.stringify($scope.cards, null, "\t");
@@ -32,7 +33,7 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
                 },
-                url: config.URL + "cards/" + $scope.idCartaoPagamento +"/payments" ,
+                url: config.URL + "cards/" + $routeParams.idCard +"/payments" ,
             }).then(function (response) {
                 $scope.pagamentos = response.data;
                 $scope.pagamentosView = JSON.stringify($scope.pagamentos, null, "\t");
@@ -65,11 +66,11 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
         }
 
 
-        $scope.idAlterarPagamento = idPagamentoAlteraService.idAlterarPagamento;
+        // $scope.idAlterarPagamento = idPagamentoAlteraService.idAlterarPagamento;
 
-        $scope.$watch('idAlterarPagamento',function(){
-            idPagamentoAlteraService.idAlterarPagamento = $scope.idAlterarPagamento;
-        })
+        // $scope.$watch('idAlterarPagamento',function(){
+        //     idPagamentoAlteraService.idAlterarPagamento = $scope.idAlterarPagamento;
+        // })
 
 //        $scope.statusPagamentoAltera = idPagamentoAlteraService.statusPagamentoAltera;
 //
@@ -82,9 +83,9 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
             $scope.sendDelete();
         }
 
-        $scope.setIdPagamentoAlterado = function(idPagamentoDesejado){
-            $scope.idAlterarPagamento = idPagamentoDesejado;
-        }
+        // $scope.setIdPagamentoAlterado = function(idPagamentoDesejado){
+        //     $scope.idAlterarPagamento = idPagamentoDesejado;
+        // }
 
 
     }]);

@@ -2,11 +2,10 @@
 
 angular.module('myApp.viewAlteraStatusPagamento', ['ngRoute'])
 
-    .controller('ViewAlteraStatusPagamentoCtrl', ["$http", "$scope", "idPagamentoAlteraService","config", function ($http,$scope,idPagamentoAlteraService, config) {
+    .controller('ViewAlteraStatusPagamentoCtrl', ["$http", "$scope","$routeParams","$location", "config", function ($http,$scope,$routeParams,$location, config) {
         $scope.alteraPagamento = {}
         $scope.payment = {}
 
-        $scope.idAlterarPagamento = idPagamentoAlteraService.idAlterarPagamento;
         //$scope.statusPagamentoAltera = idPagamentoAlteraService.statusPagamentoAltera;
 
         $scope.sendGet = function () {
@@ -16,7 +15,7 @@ angular.module('myApp.viewAlteraStatusPagamento', ['ngRoute'])
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
                 },
-                url: config.URL + "payments/" + $scope.idAlterarPagamento,
+                url: config.URL + "payments/" + $routeParams.idPayment,
             }).then(function (response) {
                 $scope.payment = response.data;
                 $scope.paymentView = JSON.stringify($scope.payment, null, "\t");
@@ -31,7 +30,7 @@ angular.module('myApp.viewAlteraStatusPagamento', ['ngRoute'])
         $scope.sendPatch = function () {
             $http({
                 method: "PATCH",
-                url: config.URL + "payments/" + $scope.idAlterarPagamento,
+                url: config.URL + "payments/" + $routeParams.idPayment,
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
@@ -45,6 +44,7 @@ angular.module('myApp.viewAlteraStatusPagamento', ['ngRoute'])
             }).then(function (response) {
                 $scope.alteraPagamento = response.data;
                 $scope.alteraPagamentoView = JSON.stringify($scope.alteraPagamento, null, "\t");
+                $location.path('/VisualizarPagamentos/' + $scope.payment.card_id);
             }, function (response) {
                 $scope.alteraPagamento = response.data || 'Request failed';
 

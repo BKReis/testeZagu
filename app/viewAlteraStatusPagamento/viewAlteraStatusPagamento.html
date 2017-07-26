@@ -9,13 +9,13 @@
 		      	<label><input type="radio" ng-model="payment.status" name="optradio" value="paid">Pago</label>
 		    </div>
 		  	<div class="radio">
-		      	<label><input type="radio" ng-model="payment.status" name="optradio" value="pending">Processando</label>
+		      	<label><input type="radio" ng-model="payment.status" name="optradio" value="pending">Pendente</label>
 		    </div>
 		    <div class="radio">
 		    	<label><input type="radio" ng-model="payment.status" name="optradio" value="failed">Falhou</label>
 		    </div>
   			</form>			
-   		</div>
-   		<a href="#!/VisualizarPagamentos" class="btn btn-success" ng-click="sendPatch()">Alterar Status</a>
+		   </div>
+   		<a class="btn btn-success" ng-click="sendPatch()">Alterar Status</a>
    	</div>
 </div>
