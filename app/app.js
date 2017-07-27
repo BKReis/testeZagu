@@ -11,6 +11,7 @@ angular.module('myApp', [
     'myApp.viewCriaPagamento',
     'myApp.viewAlteraStatusPagamento',
     'myApp.cardsServicesRequests',
+    'ui.mask',
     'ui.bootstrap'
 ])
 

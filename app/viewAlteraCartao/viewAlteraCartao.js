@@ -3,13 +3,8 @@
 angular.module('myApp.viewAlteraCartao', ['ngRoute'])
 
     .controller('ViewAlteraCartaoCtrl', ["$http", "$scope","$routeParams","$location", "config", function ($http,$scope,$routeParams,$location, config) {
-        $scope.infos = {}
+        $scope.infoCartao = {}
 
-        $scope.numeroCartao = '';
-        $scope.codigoSeguranca = '';
-        $scope.nomePortador = '';
-        $scope.limiteTotal = '';
-        $scope.limiteDisponivel = ''; 
         
         $scope.sendGet = function () {
             $http({
@@ -23,17 +18,9 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
                         "id": $scope.idChangeCard
                 }
             }).then(function (response) {
-                $scope.info = response.data;
-                $scope.infoView = JSON.stringify($scope.info, null, "\t");
-                $scope.numeroCartao = $scope.info['number'];
-                $scope.nomePortador = $scope.info['name'];
-                $scope.bandeiraCartao = $scope.info['brand'];
-                $scope.mesExp = $scope.info['exp_month'];
-                $scope.anoExp = $scope.info['exp_year'];
-                $scope.limiteTotal = $scope.info['limit'];
-                $scope.limiteDisponivel = $scope.info['available_limit']; 
+                $scope.infoCartao = response.data; 
             }, function (response) {
-                $scope.info = response.data || 'Request failed';
+                $scope.infoCartao = response.data || 'Request failed';
 
             });
         }
@@ -48,15 +35,7 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
                 },
-                data: {
-                        "name": $scope.nomePortador,
-                        "number": $scope.numeroCartao,
-                        "brand": $scope.bandeiraCartao,
-                        "exp_year": $scope.anoExp,
-                        "exp_month":$scope.mesExp,
-                        "limit": $scope.limiteTotal,
-                        "available_limit": $scope.limiteDisponivel
-                }
+                data: $scope.infoCartao 
             }).then(function (response) {
                 $scope.info = response.data;
                 $location.path('/VisualizarCartoes');
@@ -66,6 +45,10 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
 
             });
         }
+
+
+        $scope.months = _.range(1,13);
+        $scope.years = _.range(2017,2030);
 
     }]);
 

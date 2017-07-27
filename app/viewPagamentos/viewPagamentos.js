@@ -4,25 +4,19 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
 
 
 
-    .controller('ViewPagamentosCtrl', ["$http","$scope", "$routeParams", "idCartaoPagamentosService","idPagamentoAlteraService","config", function ($http,$scope,$routeParams,idCartaoPagamentosService,idPagamentoAlteraService,config) {
+    .controller('ViewPagamentosCtrl', ["$http","$scope", "$routeParams", "idCartaoPagamentosService","idPagamentoAlteraService","cardsServicesRequests","config", function ($http,$scope,$routeParams,idCartaoPagamentosService,idPagamentoAlteraService,cardsServicesRequests,config) {
         $scope.pagamentos = {}
+        $scope.card = {}
 
         $scope.idCartaoPagamento = idCartaoPagamentosService.idCartaoPagamento;
 
-             
-        $scope.sendGet = function () {
-            $http({
-                method: "GET",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-                },
-                url: config.URL + "cards/" + $routeParams.idCard,
-            }).then(function (response) {
-                $scope.cards = response.data;
-                $scope.cardsView = JSON.stringify($scope.cards, null, "\t");
-            }, function (response) {
-                $scope.cards = response.data || 'Request failed';
+
+        $scope.getCard= function(idFromCardToGet) {
+            cardsServicesRequests.getCard(idFromCardToGet).then(function(response){
+                $scope.card = response.data;
+            },function(error){ 
+                $scope.card = response.data || 'Request failed';
+            
             });
         }
 
@@ -42,7 +36,7 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
             });
         }
 
-        $scope.sendGet();
+        $scope.getCard($routeParams.idCard);
         $scope.sendGetPagamento();
 
         $scope.sendDelete = function () {
