@@ -40,10 +40,9 @@
 			<input type="text" class="form-control" ng-model="infoCartao.name" placeholder="Nome do Portador"/>
 		</div>
 		<div class="form-group">
-			<label> Limite total do cartão em centavos </label>
-			<input type="text" class="form-control" ng-model="infoCartao.limit" placeholder="Limite total do cartão em centavos"/>
+			<label> Limite total do cartão </label>
+			<input type="text" class="form-control" ng-model="infoCartao.limit" ui-money-mask="2"/>
 		</div>
-		<a class="btn btn-success" ng-click="sendPatch()">Alterar Dados</a>
+		<a class="btn btn-success" ng-click="updateCard(infoCartao)">Alterar Dados</a>
     </div>
-
 </div>

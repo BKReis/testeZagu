@@ -21,12 +21,12 @@
 		      <tr ng-repeat="card in cards">
 		      	<td><a ng-href="#!/VisualizarPagamentos/{{card.id}}">{{card.id}}</a></td>
 		        <td>{{card.name}}</td>
-		        <td>{{card.number}}</td>
+		        <td>{{card.number | formatCardNumber}}</td>
 		        <td>{{card.brand}}</td>
 						<td>{{card.exp_month}}/{{card.exp_year}}</td>
-						<td>{{card.limit}}</td>
-						<td>{{card.available_limit}}</td>
-						<td><a class="btn btn-danger" ng-click="setIdCartaoDeletado(card.id)">Deletar Cartão</a></td>
+						<td>{{card.limit/100 | currency}}</td>
+						<td>{{card.available_limit/100 | currency}}</td>
+						<td><a class="btn btn-danger" ng-click="deleteCard(card.id)">Deletar Cartão</a></td>
 						<td><td><a href="#!/AlteraCartao/{{card.id}}" class="btn btn-warning" ">Alterar Dados</a></td></td>
 					</tr>
 		    </tbody>

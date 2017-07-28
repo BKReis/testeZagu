@@ -2,26 +2,19 @@
 
 angular.module('myApp.viewCriaPagamento', ['ngRoute'])
 
-    .controller('ViewCriaPagamentoCtrl', ["$http", "$scope", "$location","$routeParams", "config", function ($http,$scope,$location,$routeParams,config) {
+    .controller('ViewCriaPagamentoCtrl', ["$http", "$scope", "$location","$routeParams","paymentsServicesRequests", "config", function ($http,$scope,$location,$routeParams,paymentsServicesRequests,config) {
         $scope.newPayment= {}
 
         $scope.newPayment.card_id = $routeParams.idCard;
 
-        $scope.sendPost = function () {
-            $http({
-                method: "POST",
-                url: config.URL + "payments",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-                },
-                data: $scope.newPayment 
-            }).then(function (response) {
+        $scope.createPayment = function(newPayment){
+            var copyPayment = angular.copy(newPayment)
+            copyPayment.amount = parseInt(copyPayment.amount*100);
+            paymentsServicesRequests.createPayment(copyPayment).then(function(response){
                 $scope.newPayment = response.data;
                 $location.path('/VisualizarPagamentos/' + $scope.newPayment.card_id)
-            }, function (response) {
-                $scope.newPayment = response.data || 'Request failed';
-
+            },function(error){
+                $scope.createResponse = error.data || 'Request failed';
             });
         }
     }]);

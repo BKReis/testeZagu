@@ -1,13 +1,12 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+var app = angular.module('myApp.view1', ['ngRoute']);
 
-    .controller('ViewVisualizaCartoesCtrl', ["$http","$scope","$location","cardsServicesRequests", "config", function ($http,$scope,$location,cardsServicesRequests,config) {
+app.controller('ViewVisualizaCartoesCtrl', ["$http","$scope","$location","cardsServicesRequests", "config", function ($http,$scope,$location,cardsServicesRequests,config) {
         $scope.cards = {}
-
-        //Responsável por deletar cartões
-        $scope.deleteCard = {};
         $scope.idDelete = '';
+        //Responsável por deletar cartões
+        $scope.cardDeleted = {};
 
         $scope.getCards = function() {
             cardsServicesRequests.getCards().then(function(response){
@@ -21,16 +20,11 @@ angular.module('myApp.view1', ['ngRoute'])
 
         $scope.deleteCard = function(idFromCardToDelete) {
             cardsServicesRequests.deleteCard(idFromCardToDelete).then(function(response){
-                $scope.deleteCard = response.data;
+                $scope.cardDeleted = response.data;
                 $scope.getCards();
             },function(error){ 
-                $scope.deleteCard = response.data || 'Request failed';
-                $scope.deleteCard.idDelete = '';
+                $scope.cardDeleted = error.data || 'Request failed';
             });
         }
 
-        $scope.setIdCartaoDeletado = function(idCartaoDesejado){
-            $scope.deleteCard.idDelete = idCartaoDesejado;
-            $scope.deleteCard($scope.deleteCard.idDelete);
-        }
-    }]);
+}]);

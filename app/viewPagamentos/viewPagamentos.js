@@ -4,82 +4,41 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
 
 
 
-    .controller('ViewPagamentosCtrl', ["$http","$scope", "$routeParams", "idCartaoPagamentosService","idPagamentoAlteraService","cardsServicesRequests","config", function ($http,$scope,$routeParams,idCartaoPagamentosService,idPagamentoAlteraService,cardsServicesRequests,config) {
-        $scope.pagamentos = {}
+    .controller('ViewPagamentosCtrl', ["$http","$scope", "$routeParams","cardsServicesRequests","paymentsServicesRequests","config", function ($http,$scope,$routeParams,cardsServicesRequests,paymentsServicesRequests,config) {
+        $scope.payments = {}
         $scope.card = {}
-
-        $scope.idCartaoPagamento = idCartaoPagamentosService.idCartaoPagamento;
-
+        $scope.deleteResponse = {}
 
         $scope.getCard= function(idFromCardToGet) {
             cardsServicesRequests.getCard(idFromCardToGet).then(function(response){
                 $scope.card = response.data;
             },function(error){ 
-                $scope.card = response.data || 'Request failed';
+                $scope.card = error.data || 'Request failed';
             
             });
         }
 
-        $scope.sendGetPagamento = function () {
-            $http({
-                method: "GET",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-                },
-                url: config.URL + "cards/" + $routeParams.idCard +"/payments" ,
-            }).then(function (response) {
-                $scope.pagamentos = response.data;
-                $scope.pagamentosView = JSON.stringify($scope.pagamentos, null, "\t");
-            }, function (response) {
-                $scope.pagamentos = response.data || 'Request failed';
+        $scope.getPayments= function(cardId) {
+            paymentsServicesRequests.getPayments(cardId).then(function(response){
+                $scope.payments = response.data;
+            },function(error){ 
+                $scope.payments = error.data || 'Request failed';
+            
             });
         }
-
+        
         $scope.getCard($routeParams.idCard);
-        $scope.sendGetPagamento();
+        $scope.getPayments($routeParams.idCard);
 
-        $scope.sendDelete = function () {
-            $http({
-                method: "DELETE",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-                },
-                url: config.URL + "payments/" + $scope.idPagamentoDelete,
-                data: {
-                }
-            }).then(function (response) {
+        $scope.deletePayment = function(payment){
+            payment.disable = true;
+            paymentsServicesRequests.deletePayment(payment.id).then(function(response){
                 $scope.deleteResponse = response.data;
-                $scope.deleteResponseView = JSON.stringify($scope.deleteResponse, null, "\t");
-                $scope.sendGetPagamento();
-            }, function (response) {
-                $scope.deleteResponse = response.data || 'Request failed';
-                $scope.idDelete = '';
+                $scope.getPayments($routeParams.idCard);
+                $scope.getCard($routeParams.idCard)
+            },function(error){
+                $scope.deleteResponse = error.data || 'Request failed';
+                payment.disable = false;
             });
         }
-
-
-        // $scope.idAlterarPagamento = idPagamentoAlteraService.idAlterarPagamento;
-
-        // $scope.$watch('idAlterarPagamento',function(){
-        //     idPagamentoAlteraService.idAlterarPagamento = $scope.idAlterarPagamento;
-        // })
-
-//        $scope.statusPagamentoAltera = idPagamentoAlteraService.statusPagamentoAltera;
-//
-//        $scope.$watch('statusPagamentoAltera',function(){
-//            idPagamentoAlteraService.statusPagamentoAltera = $scope.statusPagamentoAltera;
-//        })
-
-        $scope.setIdPagamentoDeletado = function(idPagamentoDesejado){
-            $scope.idPagamentoDelete = idPagamentoDesejado;
-            $scope.sendDelete();
-        }
-
-        // $scope.setIdPagamentoAlterado = function(idPagamentoDesejado){
-        //     $scope.idAlterarPagamento = idPagamentoDesejado;
-        // }
-
-
     }]);

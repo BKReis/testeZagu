@@ -2,50 +2,32 @@
 
 angular.module('myApp.viewAlteraCartao', ['ngRoute'])
 
-    .controller('ViewAlteraCartaoCtrl', ["$http", "$scope","$routeParams","$location", "config", function ($http,$scope,$routeParams,$location, config) {
+    .controller('ViewAlteraCartaoCtrl', ["$http", "$scope","$routeParams","$location","cardsServicesRequests", "config", function ($http,$scope,$routeParams,$location,cardsServicesRequests, config) {
         $scope.infoCartao = {}
+        $scope.infoPatch = {}
 
-        
-        $scope.sendGet = function () {
-            $http({
-                method: "GET",
-                url: config.URL + "cards/" + $routeParams.idCard,
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-                },
-                data: {
-                        "id": $scope.idChangeCard
-                }
-            }).then(function (response) {
-                $scope.infoCartao = response.data; 
-            }, function (response) {
-                $scope.infoCartao = response.data || 'Request failed';
-
+        $scope.getCard= function(idFromCardToGet) {
+            cardsServicesRequests.getCard(idFromCardToGet).then(function(response){
+                $scope.infoCartao = response.data;
+                $scope.infoCartao.limit = $scope.infoCartao.limit/100;
+            },function(error){ 
+                $scope.infoCartao = error.data || 'Request failed';
+            
             });
         }
 
-        $scope.sendGet();
+        $scope.getCard($routeParams.idCard);
 
-        $scope.sendPatch = function () {
-            $http({
-                method: "PATCH",
-                url: config.URL + "cards/" + $routeParams.idCard,
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-                },
-                data: $scope.infoCartao 
-            }).then(function (response) {
-                $scope.info = response.data;
+        $scope.updateCard = function(infoCartao){
+            var newInfo = angular.copy(infoCartao)
+            newInfo.limit = parseInt(newInfo.limit*100);
+            cardsServicesRequests.updateCard(newInfo).then(function(response){
+                $scope.infoPatch = response.data;
                 $location.path('/VisualizarCartoes');
-                
-            }, function (response) {
-                $scope.info = response.data || 'Request failed';
-
+            },function(error){
+                $scope.infoPatch = error.data || 'Request failed';
             });
         }
-
 
         $scope.months = _.range(1,13);
         $scope.years = _.range(2017,2030);

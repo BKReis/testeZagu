@@ -41,9 +41,9 @@
 		</div>
 		<div class="form-group">
 			<label> Limite Total do Cartão </label>
-			<input type="number" class="form-control" ng-model="newCard.limit" placeholder="Limite total do cartão em centavos"/>
+			<input type="text" class="form-control" ng-model="newCard.limit" ui-money-mask="2"/>
 		</div>
-    	<button class="btn btn-primary" ng-click="(newCard.number.length==16) && (createCard(newCard))">Enviar Cadastro</button>
+    	<button class="btn btn-primary" ng-click="createCard(newCard)">Enviar Cadastro</button>
     	
     </div>
 </div>

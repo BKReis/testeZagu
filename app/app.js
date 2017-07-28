@@ -11,6 +11,9 @@ angular.module('myApp', [
     'myApp.viewCriaPagamento',
     'myApp.viewAlteraStatusPagamento',
     'myApp.cardsServicesRequests',
+    'myApp.paymentsServicesRequests',
+    'myApp.filters',
+    'ui.utils.masks',
     'ui.mask',
     'ui.bootstrap'
 ])
@@ -65,20 +68,6 @@ angular.module('myApp', [
         $routeProvider.otherwise({redirectTo: '/Home'});
 
     }])
-
-    //Serviços
-    .service('idChangeCardService',function(){
-        this.idChangeService = "";
-    })
-
-    .service('idCartaoPagamentosService',function(){
-        this.idCartaoPagamentoService = "";
-    })
-
-    .service('idPagamentoAlteraService',function(){
-        this.idAlterarPagamento = "";
-      //  this.statusPagamentoAltera = "";
-    })
 
     .constant('config', {
         "URL": "http://estagio.zagu.com.br/"
