@@ -3,36 +3,30 @@ var app = angular.module('myApp.cardsServicesRequests',[]);
 
 app.service('cardsServicesRequests', ["$http","$window","config",function($http,$window,config) {    
     var card = {};
-
+    var header = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + window.localStorage.getItem('key')
+    };
     card.getCards = function (){
         return $http({
+            headers: header,
             method: "GET",
-            headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-    },
             url: config.URL + "cards",
         });
     };
 
     card.deleteCard = function(cardID){
         return $http({
+                headers: header,
                 method: "DELETE",
-                headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-    },
                 url: config.URL + "cards/" + cardID
             });
     };
 
     card.createCard = function(newCard) {
         return $http({
+                headers: header,
                 method: "POST",
-                headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-    },
                 url: config.URL + "cards",
                 data: newCard
             });
@@ -41,22 +35,16 @@ app.service('cardsServicesRequests', ["$http","$window","config",function($http,
     card.getCard = function(cardId){
         console.log(cardId);
         return $http({
+                headers: header,
                 method: "GET",
-                headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-    },
                 url: config.URL + "cards/" + cardId
             });
     };
       
     card.updateCard = function(card){
         return $http({
+                headers: header,
                 method: "PATCH",
-                headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer b24ebfe15c9e504c9cc89e826b6f91bd'
-    },
                 url: config.URL + "cards/" + card.id,
                 data: card
             });

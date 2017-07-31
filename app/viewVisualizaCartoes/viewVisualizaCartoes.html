@@ -26,12 +26,14 @@
 						<td>{{card.exp_month}}/{{card.exp_year}}</td>
 						<td>{{card.limit/100 | currency}}</td>
 						<td>{{card.available_limit/100 | currency}}</td>
-						<td><a class="btn btn-danger" ng-click="deleteCard(card.id)">Deletar Cartão</a></td>
+						<!--<td><a class="btn btn-danger" ng-click="deleteCard(card.id)">Deletar Cartão</a></td>-->
+						<td><a class="btn btn-danger" ng-click="setDeleteId(card.id)">Deletar Cartão</a></td>
+
 						<td><td><a href="#!/AlteraCartao/{{card.id}}" class="btn btn-warning" ">Alterar Dados</a></td></td>
 					</tr>
 		    </tbody>
 		  </table>
 		<br>
-	  <hr>    
+		<hr>
 	</div>	
 </div>

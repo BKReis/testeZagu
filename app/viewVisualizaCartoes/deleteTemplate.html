@@ -1,0 +1,9 @@
+
+<div style="margin: 20px;" ng-controller="deleteTemplateCtrl">
+    <h3>Deletando cartão de crédito</h3>
+    <p>Tem certeza que deseja deletar esse cartão de crédito?</p>
+    <p style="color: red">As informações não poderam ser recuperadas</p>
+    <button class="btn btn-default" ng-click="closeDeleteCardModel()">Cancelar</button>
+    <button type="button" class="btn btn-default btn-danger" ng-click="deleteCard(selectedCardId)">Deletar</button>
+    <h1>{{selectedCardId}}</h1>
+</div>

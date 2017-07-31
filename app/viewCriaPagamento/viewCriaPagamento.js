@@ -14,7 +14,7 @@ angular.module('myApp.viewCriaPagamento', ['ngRoute'])
                 $scope.newPayment = response.data;
                 $location.path('/VisualizarPagamentos/' + $scope.newPayment.card_id)
             },function(error){
-                $scope.createResponse = error.data || 'Request failed';
+                $scope.newPayment.errors = error.data || 'Request failed';
             });
         }
     }]);

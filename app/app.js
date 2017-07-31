@@ -13,6 +13,7 @@ angular.module('myApp', [
     'myApp.cardsServicesRequests',
     'myApp.paymentsServicesRequests',
     'myApp.filters',
+    'myApp.deleteTemplate',
     'ui.utils.masks',
     'ui.mask',
     'ui.bootstrap'

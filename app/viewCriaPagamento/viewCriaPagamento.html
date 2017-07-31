@@ -2,7 +2,8 @@
 
 	<div ng-controller="ViewCriaPagamentoCtrl">
 
-		<div ng-bind-html="app/errors/errorsTemplate.html"></div>
+		<div ng-include="'errors/errorsTemplate.html'"></div>
+		
 		<center><h1>Cadastro de Novo Pagamento</h1></center>
 		<center><p>Preencha as informações corretamente</p></center>
 		<div class="form-group">
@@ -11,6 +12,7 @@
 		</div>
 		<hr>
 		<h4> Obs. O pagamento será cadastrado com o status "Pending"</h4>
+		<h5>{{newPayment.errors}}</h5>
     	<a  class="btn btn-success" ng-click="createPayment(newPayment)">Enviar Pagamento</a>
     </div>
 </div>

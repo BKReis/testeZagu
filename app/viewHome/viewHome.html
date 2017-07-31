@@ -1,6 +1,13 @@
 <div class="row">
+	<div ng-controller="ViewHomeCtrl">
 	<div class="col-md-6 col-md-offset-3">
-		<h4>Seja Bem Vindo à aplicação de gerenciamento de cartões de crédito.</h4>
-		<h5>Selecione a operação que deseja realizar na barra de navegação acima.</h5>
+		<h4><center>Seja Bem Vindo à aplicação de gerenciamento de cartões de crédito.</center></h4>
+		<h4><center>Antes de começar a utilizar o nosso serviço, digite sua chave de autenticação com nossa API no campo abaixo</center></h4>
+		<div>
+			<input type="text" class="form-control" ng-model="keys" />
+		</div>
+		<a  class="btn btn-success" ng-click="setKey(keys)">Enviar Chave</a>
+		<h5><center>Selecione a operação que deseja realizar na barra de navegação acima.</center></h5>
+	</div>
 	</div>
 </div>
