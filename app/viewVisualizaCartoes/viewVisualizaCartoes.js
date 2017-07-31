@@ -17,6 +17,7 @@ app.controller('ViewVisualizaCartoesCtrl', ["$http","$scope","$location","cardsS
         };
 
         $scope.getCards();
+        
 
         $scope.deleteCard = function(idFromCardToDelete) {
             cardsServicesRequests.deleteCard(idFromCardToDelete).then(function(response){
@@ -26,5 +27,6 @@ app.controller('ViewVisualizaCartoesCtrl', ["$http","$scope","$location","cardsS
                 $scope.cardDeleted = error.data || 'Request failed';
             });
         }
+
 
 }]);
