@@ -4,10 +4,11 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
 
 
 
-    .controller('ViewPagamentosCtrl', ["$http","$scope", "$routeParams","cardsServicesRequests","paymentsServicesRequests","config", function ($http,$scope,$routeParams,cardsServicesRequests,paymentsServicesRequests,config) {
+    .controller('ViewPagamentosCtrl', ["$http","$scope", "$routeParams","$uibModal","cardsServicesRequests","paymentsServicesRequests","config", function ($http,$scope,$routeParams,$uibModal,cardsServicesRequests,paymentsServicesRequests,config) {
         $scope.payments = {}
         $scope.card = {}
         $scope.deleteResponse = {}
+        $scope.paymentSelected = {}
 
         $scope.getCard= function(idFromCardToGet) {
             cardsServicesRequests.getCard(idFromCardToGet).then(function(response){
@@ -30,15 +31,31 @@ angular.module('myApp.viewPagamentos', ['ngRoute'])
         $scope.getCard($routeParams.idCard);
         $scope.getPayments($routeParams.idCard);
 
-        $scope.deletePayment = function(payment){
-            payment.disable = true;
-            paymentsServicesRequests.deletePayment(payment.id).then(function(response){
-                $scope.deleteResponse = response.data;
+
+        $scope.openModal = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'viewPagamentos/deleteTemplatePayment.html',
+                controller: "deleteTemplatePaymentCtrl",
+                resolve: {
+                    keyPromise: function() {
+                        return $scope.paymentSelected;
+                    }
+                }
+            }); 
+            modalInstance.result.then(function (message) {
+                $scope.getCard($routeParams.idCard);
                 $scope.getPayments($routeParams.idCard);
-                $scope.getCard($routeParams.idCard)
-            },function(error){
-                $scope.deleteResponse = error.data || 'Request failed';
-                payment.disable = false;
-            });
+                $scope.paymentSelected.disable = false;
+          },function() {
+              $scope.paymentSelected.disable = false;
+              console.log("fechou");
+          });
+        }
+
+
+        $scope.setDeleteId = function(paymentToDelete){
+            $scope.paymentSelected = paymentToDelete;
+            $scope.paymentSelected.disable = true;
+            $scope.openModal();
         }
     }]);

@@ -18,24 +18,34 @@ app.controller('ViewVisualizaCartoesCtrl', ["$http","$scope","$location","$uibMo
 
         $scope.getCards();
 
-        
-        $scope.deleteCard = function(idFromCardToDelete) {
-            cardsServicesRequests.deleteCard(idFromCardToDelete).then(function(response){
-                $scope.cardDeleted = response.data;
-                $scope.getCards();
-            },function(error){ 
-                $scope.cardDeleted = error.data || 'Request failed';
-            });
-        } 
-
         $scope.openModal = function () {
             var modalInstance = $uibModal.open({
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'viewVisualizaCartoes/deleteTemplate.html',
-            //    scope: $scope
-            });        
+                templateUrl: 'viewVisualizaCartoes/deleteTemplateCard.html',
+                controller: "deleteTemplateCardCtrl",
+                resolve: {
+                    keyPromise: function() {
+                        return $scope.selectedCardId;
+                    }
+                }
+            }); 
+            modalInstance.result.then(function (message) {
+                $scope.getCards();
+          }, function() {
+              console.log("fechou");
+          });
         }
+
+        // var modalInstance = $uibModal.open({
+        //       templateUrl: 'app/_common/messages/_edit.tpl.html',
+        //       controller: 'EditMessageModalCtrl',
+        //       backdrop: 'static',
+        //       //size: 'lg',
+        //       resolve: {
+        //           customerPromise: $scope.prospect,
+        //           parentModel: { name: 'Prospect' },
+        //           messagePromise: message
+        //       }
+        //   });
 
         $scope.setDeleteId = function(idToDelete){
             $scope.selectedCardId = idToDelete;

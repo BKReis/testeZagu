@@ -3,9 +3,10 @@
 	<div ng-controller="ViewAlteraCartaoCtrl">
 		<center><h1>Alteração dos dados do cartão com ID </h1></center>
 		<center><p>Substitua as informações que deseja alterar</p></center>
+		<div ng-include="'errors/errorsTemplate.html'"></div>
 		<div class="form-group">
 			<label> Número do Cartão </label>
-			<input type="text" class="form-control" ng-model="infoCartao.number" data-toogle="tooltip" title="Deve ter 16 números" placeholder="Número do Cartão"/>
+			<input type="text" class="form-control" ng-model="infoCartao.number" ui-mask="9999 9999 9999 9999" ui-options="{clearOnBlur: false}"  ui-mask-placeholder="" ui-mask-placeholder-char="space"  />
 		</div>
 		<div class="form-group">
 			<form>
@@ -43,6 +44,6 @@
 			<label> Limite total do cartão </label>
 			<input type="text" class="form-control" ng-model="infoCartao.limit" ui-money-mask="2"/>
 		</div>
-		<a class="btn btn-success" ng-click="updateCard(infoCartao)">Alterar Dados</a>
+		<a class="btn btn-success" ng-click="updateCard(infoCartao)" ng-disabled="infoCartao.disable">Alterar Dados</a>
     </div>
 </div>

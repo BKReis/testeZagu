@@ -19,11 +19,14 @@ angular.module('myApp.viewAlteraStatusPagamento', ['ngRoute'])
 
         
         $scope.updatePayment= function(payment) {
+            $scope.payment.disable = true;
             paymentsServicesRequests.updatePayment(payment).then(function(response){
                 $scope.patchResponse = response.data;
+                $scope.payment.disable = false;
                 $location.path('/VisualizarPagamentos/' + $scope.payment.card_id);
             },function(error){ 
                 $scope.patchResponse = error.data || 'Request failed';
+                $scope.payment.disable = false;
             });
         }
     }]);

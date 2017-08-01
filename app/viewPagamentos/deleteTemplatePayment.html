@@ -1,0 +1,18 @@
+<!-- Modal -->
+  <div id="myModal" role="dialog" >
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+            <h3>Deletando pagamento</h3>
+        </div>
+        <div class="modal-body">
+            <p>Tem certeza que deseja deletar esse pagamento?</p>
+            <p style="color: red">As informações não poderão ser recuperadas</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="close()">Cancelar</button>
+            <button type="button" class="btn btn-default btn-danger" ng-click="deletePayment(keyPromise)">Deletar</button>
+        </div>
+    </div>   
+  </div>

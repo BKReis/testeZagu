@@ -10,11 +10,14 @@ angular.module('myApp.viewCriaPagamento', ['ngRoute'])
         $scope.createPayment = function(newPayment){
             var copyPayment = angular.copy(newPayment)
             copyPayment.amount = parseInt(copyPayment.amount*100);
+            $scope.newPayment.disable = true;
             paymentsServicesRequests.createPayment(copyPayment).then(function(response){
                 $scope.newPayment = response.data;
+                $scope.newPayment.disable = false;
                 $location.path('/VisualizarPagamentos/' + $scope.newPayment.card_id)
             },function(error){
                 $scope.newPayment.errors = error.data || 'Request failed';
+                $scope.newPayment.disable = false;
             });
         }
     }]);

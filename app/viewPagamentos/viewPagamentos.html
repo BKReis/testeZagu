@@ -47,7 +47,7 @@
 			        <td>{{payment.card_id}}</td>
 			        <td>{{payment.date}}</td>
 					<td>{{payment.status}}</td>
-					<td><a class="btn btn-danger" ng-click="deletePayment(payment)" ng-disabled="payment.disable">Deletar Pagamento</a></td>
+					<td><a class="btn btn-danger" ng-click="setDeleteId(payment)" ng-disabled="paymentSelected.disable">Deletar Pagamento</a></td>
 					<td><a ng-href="#!/VisualizarPagamentos/{{payment.card_id}}/AlterarStatusPagamento/{{payment.id}}" class="btn btn-warning">Alterar Status</a></td>
 				</tr>
 		    </tbody>

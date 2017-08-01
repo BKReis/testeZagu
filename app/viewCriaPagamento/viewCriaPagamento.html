@@ -13,6 +13,6 @@
 		<hr>
 		<h4> Obs. O pagamento será cadastrado com o status "Pending"</h4>
 		<h5>{{newPayment.errors}}</h5>
-    	<a  class="btn btn-success" ng-click="createPayment(newPayment)">Enviar Pagamento</a>
+    	<a  class="btn btn-success" ng-click="createPayment(newPayment)" ng-disabled="newPayment.disable">Enviar Pagamento</a>
     </div>
 </div>

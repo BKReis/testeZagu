@@ -1,6 +1,7 @@
 <center>
-    <h1 ng-show="newPayment.errors">Erros</h1>
-    <div ng-repeat="error in newPayment.errors">
-        <p>{{error}}</p>            
+    <div ng-repeat="error in errors">
+          <div class="alert alert-danger">
+              <strong>Erro!</strong> {{error.text}}
+          </div>
     </div>
 </center>
