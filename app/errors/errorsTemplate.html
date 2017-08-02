@@ -1,7 +1,23 @@
 <center>
     <div ng-repeat="error in errors">
-          <div class="alert alert-danger">
-              <strong>Erro!</strong> {{error.text}}
-          </div>
+        <div class="alert alert-danger alert-dismissable">
+            <a class="close" data-dismiss="alert" aria-label="close" ng-click="errors.splice($index, 1)">×</a>
+            <strong>Erro!</strong> {{error.text}}
+        </div>
+    </div>
+
+    <div ng-repeat="error in newPayment.errors">
+        <div class="alert alert-danger alert-dismissable">
+            <a class="close" data-dismiss="alert" aria-label="close" ng-click="errors.splice($index, 1)">×</a>
+            <strong>Erro!</strong> {{error[0]}}
+        </div>
+    </div>
+
+    
+    <div ng-repeat="error in myErrors">
+        <div class="alert alert-danger alert-dismissable">
+            <a class="close" data-dismiss="alert" aria-label="close" ng-click="myErrors.splice($index, 1)">×</a>
+            <strong>Erro!</strong> {{error.text}}
+        </div>
     </div>
 </center>

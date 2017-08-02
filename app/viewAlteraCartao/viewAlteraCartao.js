@@ -29,36 +29,30 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
             //Validação dos campos
             if( !$scope.infoCartao.number || $scope.infoCartao.number.length!==16 ){
                 $scope.errors.push({name: "cardId", text: "O número do cartão deve ter 16 dígitos!"})
-                $scope.thereIsErrors = true;
-                $scope.infoCartao.disable = false; 
+                $scope.thereIsErrors = true; 
             }
             if(!$scope.infoCartao.brand){
                 $scope.errors.push({name: "brand", text: "Deve ser selecionada uma bandeira para o cartão!"})
                 $scope.thereIsErrors = true;
-                $scope.infoCartao.disable = false; 
             }
             if(!$scope.infoCartao.exp_month){
                 $scope.errors.push({name: "exp_month", text: "Deve ser selecionado um mês de expiração para o cartão!"})
                 $scope.thereIsErrors = true;
-                $scope.infoCartao.disable = false; 
             }
             if(!$scope.infoCartao.exp_year){
                 $scope.errors.push({name: "exp_year", text: "Deve ser selecionado um ano de expiração para o cartão!"})
                 $scope.thereIsErrors = true;
-                $scope.infoCartao.disable = false; 
             }
             if(!$scope.infoCartao.name){
                 $scope.errors.push({name: "name", text: "Deve ser digitado o nome do portador do cartão!"})
                 $scope.thereIsErrors = true;
-                $scope.infoCartao.disable = false; 
             }
             if(!$scope.infoCartao.limit){
                 $scope.errors.push({name: "limit", text: "Deve ser selecionado um limite para o cartão!"})
                 $scope.thereIsErrors = true;
-                $scope.infoCartao.disable = false; 
             }
             if($scope.thereIsErrors == true){
-                $scope.getCard($routeParams.idCard);
+                $scope.infoCartao.disable = false;
                 return;
             }
             //Passa pra centavos
@@ -78,5 +72,15 @@ angular.module('myApp.viewAlteraCartao', ['ngRoute'])
         $scope.months = _.range(1,13);
         $scope.years = _.range(2017,2030);
 
-    }]);
+    }])
+    
+    .directive("myError", function(){
+        return {
+            templateUrl: 'errors/errorsTemplate.html',
+            scope:{
+                myErrors: "="
+            }
+        }
+    })
+    ;
 
